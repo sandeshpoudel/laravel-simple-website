@@ -15,8 +15,10 @@ class ArticlesController extends Controller
     );
     }
     //show a single resource
-    public function show($id){
-    $article = Article::find($id);
+    public function show(Article $article){
+    // $article = Article::findOrFail($id);
+
+    // return $article;
     
     return view ('articles.show',[
         'article'=>$article
@@ -24,20 +26,44 @@ class ArticlesController extends Controller
     }
 
     public function create(){
-        //show a view to create a new resource
+        return view ('articles.create');
     }
 
-    public function store (){
+    public function store (Article $article){
         //it handle and store new resource created
+        request()->validate([
+            'title'=>['required', 'min:2', 'max:255'],
+            'excerpt' => 'required',
+            'body' =>'required'
+        ]);
 
+       $article = new Article();
+       $article->title = request('title');
+       $article->excerpt = request('excerpt');
+       $article->body= request('body');
+       $article->save();
+
+       return redirect('/articles');
     }
 
-    public function edit (){
-        //show a view to edit an existing resource
+    public function edit (Article $article){
+        
+        return view ('articles.edit', compact('article'));
 
     }
-    public function update(){
-        //update recently created resource and store to database
+    public function update(Article $article){
+        request()->validate([
+            'title'=>['required', 'min:2', 'max:255'],
+            'excerpt' => 'required',
+            'body' =>'required'
+        ]);
+        
+        
+        $article->title = request('title');
+        $article->excerpt = request('excerpt');
+        $article->body = request('body');
+        $article->save();
+        return redirect('/articles/'.$article->id);
     }
     public function destroy(){
         //it delets the resource from database

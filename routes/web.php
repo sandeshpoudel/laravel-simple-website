@@ -1,5 +1,6 @@
 <?php
 
+use App\Article;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,4 +44,24 @@ Route::get('/about', function(){
 });
 
 Route::get('/articles', 'ArticlesController@index');
+Route::get('/articles/create', 'ArticlesController@create');
 Route::get('/articles/{article}', 'ArticlesController@show');
+Route::post('/articles', 'ArticlesController@store');
+Route::get('/articles/{article}/edit', 'ArticlesController@edit');
+Route::PUT('/articles/{article}', 'ArticlesController@update');
+//REST
+//      Articles/   ---list of articles
+//      Articles/:id --- is for single article
+
+//  GET/videos
+//  POST/videos
+
+//  GET/videos/2
+//  GET/videos/2/edit
+//  GET/videos/create
+
+//  PUT/videos/2
+
+//  DELETE/videos/2 
+//
+
