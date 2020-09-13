@@ -31,7 +31,7 @@
         <label for="excerpt" class="label">Excerpt</label>
     </div>
     <div class="control">
-        <textarea class="textarea @error('excerpt') is-danger @enderror" name="excerpt" id="excerpt" value="{{$old('excerpt')}}"></textarea>
+        <textarea class="textarea @error('excerpt') is-danger @enderror" name="excerpt" id="excerpt" >{{old('excerpt')}}</textarea>
         @error('excerpt')
 
         <p class="help is-danger" >{{$errors->first('excerpt')}}</p>
@@ -42,10 +42,29 @@
         <label for="body" class="label">Body Text</label>
     </div>
     <div class="control">
-        <textarea class="textarea @error('body') is-danger @enderror" name="body" id="body" value="{{{old('body')}}" ></textarea>
+        <textarea class="textarea @error('body') is-danger @enderror" name="body" id="body" >{{old('body')}}</textarea>
         @error('body')
         <p class="help is-danger">{{$errors->first('body')}}</p>
         @enderror
+    </div>
+
+    <div class="field">
+        <label for="tags" class="label">Tags</label>
+    
+    <div class="control">
+        <select
+        name="tags[]"
+        multiple
+        >
+        @foreach ($tags as $tag)
+        <option value="{{$tag->id}}"> {{$tag->name}}</option>
+    @endforeach
+        </select>
+
+        @error('tags')
+        <p class="help is-danger">{{$errors->first('tags')}}</p>
+        @enderror
+        </div>
     </div>
 
 <div class="field is-grouped">

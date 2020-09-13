@@ -43,10 +43,10 @@ Route::get('/about', function(){
     ]);
 });
 
-Route::get('/articles', 'ArticlesController@index');
-Route::get('/articles/create', 'ArticlesController@create');
-Route::get('/articles/{article}', 'ArticlesController@show');
+Route::get('/articles', 'ArticlesController@index')->name('articles.index');
 Route::post('/articles', 'ArticlesController@store');
+Route::get('/articles/create', 'ArticlesController@create');
+Route::get('/articles/{article}', 'ArticlesController@show')->name('articles.show');
 Route::get('/articles/{article}/edit', 'ArticlesController@edit');
 Route::PUT('/articles/{article}', 'ArticlesController@update');
 //REST

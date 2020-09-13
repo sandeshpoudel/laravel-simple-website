@@ -3,7 +3,7 @@
 <div id ="wrapper">
     <div id ="page" class="container">
 <ul class="style1">
-                @foreach ($articles as $article)
+                @forelse ($articles as $article)
 				<li class="first">
 					<h3>
                         {{$article->title}}
@@ -12,12 +12,15 @@
     <img src="images/banner.jpg" alt="" class="image image-full"/>
 </p>
 					<p>
-                        <a href="/articles/{{$article->id}}">{{$article->excerpt}}.</a>
+                        <a href="{{$article->path()}}">{{$article->excerpt}}.</a>
                     </p>
                 </li>
-                @endforeach
+                
 				
             </ul>
+            @empty
+                <p>No relevant artiles to display.</p>
+                @endforelse
 </div>
 </div>
 @endsection
